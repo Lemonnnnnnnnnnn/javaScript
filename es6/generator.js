@@ -1,16 +1,18 @@
-// 生成器带有*号，所有的生成器都有一个内置的对 .next() 已经 [Symbol.iterator]( )方法的实现。
-// range返一个可迭代的生成器，每次循环调用一次yield
+//#region basic
 function* range(start, end) {
     for (let i = start; i < end; i++) {
         yield i;
     }
 }
 
+const myGenerator = range(1,4)
+console.log(myGenerator.next()); // { value: 1, done: false }
+//#endregion basic
+
 function* return_use() {
     yield "hello";
     yield "world";
     return "终止！";
-    yield "!!!!";
 }
 
 function next_param_use() {
@@ -43,8 +45,6 @@ function error_catch() {
         yield 1;
         console.log('throwing an exception');
         throw new Error('generator broke!');
-        yield 2;
-        yield 3;
     }
 
     function log(generator) {
@@ -203,18 +203,18 @@ function generator_promise_use() {
 }
 
 
-function main() {
-    error_catch2()
-    // generator_promise_use()
-    // yield_star2()
-    // for (const val of range(0, 4)) {
-    //     console.log(val)
-    // }
-    // for (const val of return_use()) {
-    //     console.log(val)
-    // }
-    // next_param_use();
-}
+// function main() {
+//     error_catch2()
+//     // generator_promise_use()
+//     // yield_star2()
+//     // for (const val of range(0, 4)) {
+//     //     console.log(val)
+//     // }
+//     // for (const val of return_use()) {
+//     //     console.log(val)
+//     // }
+//     // next_param_use();
+// }
 
-main();
+// main();
 

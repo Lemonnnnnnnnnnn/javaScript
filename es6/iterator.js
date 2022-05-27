@@ -1,3 +1,25 @@
+//#region objectIterator
+const myIterator = {
+    number: 0,
+    next: function () {
+        this.number++
+        if (this.number < 4) {
+            return { done: false, value: this.number }
+        }
+        return { done: true, value: undefined }
+    },
+    [Symbol.iterator]: function () {
+        return this
+    }
+}
+
+
+for(let i of myIterator){
+    console.log(i);  // 1,2,3
+}
+//#endregion objectIterator
+
+//#region class
 class RangeIterator {
     constructor(start, end) {
         this.value = start;
@@ -15,15 +37,17 @@ class RangeIterator {
     }
 }
 
-function range(start , end){
-    return new RangeIterator(start , end);
+function range(start, end) {
+    return new RangeIterator(start, end);
 }
 
 /**
  * 一个 for-of 循环通过调用集合上的 [Symbol.iterator]( ) 方法进行启动。这个操作将会返回一个新的迭代对象
  * 一个迭代对象可以是具有 .next( ) 方法的任意对象。 每次循环调用一次.next()
  */
-for(const val of range(0,3)){
+for (const val of range(0, 3)) {
     console.log(val)
 }
+
+//#endregion class
 
