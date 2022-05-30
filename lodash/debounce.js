@@ -1,6 +1,7 @@
 const debounce = require('lodash/debounce')
 const moment = require('moment')
 
+//#region basic
 function basic() {
     const beginTime = moment()
 
@@ -20,7 +21,9 @@ function basic() {
         input('world')  // 开始时间和结束时间相差03秒
     }, 1000);
 }
+//#endregion basic
 
+//#region maxWait
 function maxWait() {
     const beginTime = moment()
 
@@ -39,10 +42,11 @@ function maxWait() {
         // 执行过程： 计时器重新计时，计时1秒，到达maxWait上限，停止等待
     }, 1000);
 }
+//#endregion maxWait
 
-maxWait()
+// maxWait()
 
-
+//#region interrupt
 function interrupt() {
     function inputValue(str) {
         console.log('input value is ' + str);
@@ -54,7 +58,9 @@ function interrupt() {
     // input.flush() // 找到之前调用的debounceFunc函数，并立即执行
     input.cancel() // 找到之前调用的debounceFunc函数，并停止执行
 }
+//#endregion interrupt
 
+//#region leading
 function leading() {
     const beginTime = moment()
 
@@ -74,6 +80,7 @@ function leading() {
     }, 1000)
 
 }
+//#endregion leading
 
 // leading()
 
