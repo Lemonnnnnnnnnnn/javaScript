@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<!-- <script src="index.js"></script> -->
+<script>
+    const binaryToZeroWidth = binary => (
+        binary.split('').map((binaryNum) => {
+            const num = parseInt(binaryNum, 10);
+            if (num === 1) {
+                return '&ZeroWidthSpace;'; // 零宽空白，用于加密；解密相反
+            } else if (num === 0) {
+                return '&zwnj;'; // 零宽不连字，用于加密；解密相反
+            }
+            return '&zwj;'; // 分隔符空格换成零宽连字，用于连接
+        }).join('') // 转成字符串
+    );
+
+    // 字符串转二进制，各个字符串之间逗号分割
+    function strToBinary(str) {
+        let list = str.split('')
+        const binaryList = list.map(item => item.charCodeAt().toString(2)) // 每个字符串先转成unicode编码，再转成二进制字符串
+        return binaryList.join(' ') // 用空格分隔
+    }
+    const username = 'abc'
+    const sourceData = "lll"
+
+    const encryptionData = binaryToZeroWidth(strToBinary(username))
+
+    const resStr = sourceData + encryptionData
+    // html("Hello <b>world&nbsp;</b>!")
+    $(document).ready(function () {
+        $("#app").html(resStr)
+    })
+
+</script>
+
+</html>
